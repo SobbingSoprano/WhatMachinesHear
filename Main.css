@@ -1,0 +1,91 @@
+body {
+    background-color: #FCFBF4;
+    font-family: Arial, sans-serif;
+    border: 0;
+    height: 1500PX;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    transition: opacity 2s ease-in-out;
+}
+.hide {
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+.container {
+    flex-direction: column;
+}
+.bar {
+    height: 80px;
+    width: auto;
+    justify-content: center;
+    align-content: center;
+    padding:10px 5px 20px 5px;
+}
+.heading {
+    font-family: afacad flux;
+    font-size: 60px;
+    letter-spacing:8px;
+    padding:0;
+    margin:0;
+}
+.searchbar {
+    background-color: black;
+    border-radius: 20px;
+    width: 85%;
+    place-self: center;
+    transition: width 3s;
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    height: 50px;
+    transition: opacity 2s ease-in-out 1s;
+}
+
+.search {
+    color: white;
+    background-color: white;
+    
+    opacity: 80%;
+    border-radius: 20px;
+    width: 90%;
+    text-align: center;
+    transition: opacity 3s ease-in-out;
+}
+.search:focus-visible {
+    outline: none;
+    background-color: white;
+}
+#input {
+    color: black;
+    font-family: afacad flux;
+}
+#results {
+    height: 500px;
+    width: auto;
+    place-self: center;
+
+}
+.song-item {
+    place-self: center;
+    justify-items: center;
+}
+.song-item:hover .artist-name{
+    text-shadow: 0px 0.55px 0px black;
+    transition: text-shadow .35s ease-in-out;
+}
+.artist-name {
+    font-family: afacad flux;
+    transition: text-shadow 1s ease-in-out;
+}
+
+.cover-art {
+    box-shadow: gray 0px 0px;
+    transition: box-shadow 1s ease-in-out;
+}
+
+.cover-art:hover {
+    box-shadow: 5px 3.2px;
+    transition: box-shadow .35s ease-in-out;
+}

@@ -2,7 +2,7 @@ const client_id = 'f7cfe8cfaace4308b94aa278c99ce07e';
 const client_secret = '0e07a19d71f44e5180bc8f58ebfda9a3';
 
 
-let accessToken = 'BQCwwg8o5bvNE7EU_xH-WvCRHHi8yey_qA0iNWHGRMS77_wthzFqD1xJaR6ZEyH-xvKPyPx5ufUmlo1X8_0MBFjv1674NTiwjUcEH5of3T-jZ9zDpaayGdgWjexOTiwKtjFtqbN5Behqr07gXEZaKvdeH5SE-LX5xMGLPfmI485KhyOL057zTUrJg1d6EgJrH_S_v4tLQuLompU6dJGksDw4geqr0ma2_oDyWVPlv2-Sy0z5_XWXbCC2FKfn3vdU'; // Store globally
+let accessToken = 'BQA3ZiHf1eutng29LqLWy2G4NxiVS1cJaKdPXRmha4oUc3l8fxoAmYnchhvB-MLPT4aLzf700dKFlTj6oI1KtnLBa8aDviUNsgj9A0e4KC6fCyBNoYWVzjbNLQtZqyFzS-uMKU4eaYVYHRy1F1gAYle2yoriZJfgLO4d7v3MwhRo1EQIJNCfcuRuOFwCqF1BljButn_jWheVNEELcjMfnLrEIqAiQY4-zgr-BQPZAklszqRsOL002z9Cb8Cb5WPz'; // Store globally
 
 // Function to get the Spotify Access Token
 const getSpotifyToken = async () => {
@@ -52,6 +52,7 @@ const searchSongs = async (query) => {
         console.error('Search failed:', error);
     }
 };
+
 
 // Function to Display Search Results with Staggered Fade-In
 const displayResults = (tracks) => {

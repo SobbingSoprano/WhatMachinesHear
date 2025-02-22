@@ -60,26 +60,30 @@ const displayResults = (tracks) => {
     resultsDiv.innerHTML = ''; // Clear old results
 
     tracks.forEach((track, index) => {
-        // Create a container div for each song with the 'hide' class
         const songItem = document.createElement('div');
-        songItem.classList.add('song-item', 'hide'); // Add 'hide' class initially
+        songItem.classList.add('song-item', 'hide');
+
         const coverArt = track.album.images[1]?.url;
+        const trackId = track.id; // Get track ID
+
         songItem.innerHTML = `
             <p>
                 <strong>${track.name}</strong> 
                 by <span class="artist-name">${track.artists.map(a => a.name).join(', ')}</span>
             </p>
-            <img src="${coverArt}" alt="${track.name} Cover Art" class="cover-art"/>
+            <a href="song.html?track_id=${trackId}">
+                <img src="${coverArt}" alt="${track.name} Cover Art" class="cover-art"/>
+            </a>
         `;
 
         resultsDiv.appendChild(songItem);
 
-        // Use setTimeout to stagger the removal of 'hide' class
         setTimeout(() => {
-            songItem.classList.remove('hide'); // Remove 'hide' class to trigger fade-in
-        }, 500 * (index + 1)); // Stagger the fade-in effect (500ms per item)
+            songItem.classList.remove('hide');
+        }, 500 * (index + 1));
     });
 };
+
 
 
 // Event Listener for Search Bar

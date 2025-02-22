@@ -30,32 +30,6 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     });
 };
 
-
-// Function to get the Spotify Access Token
-const getSpotifyToken = async () => {
-    const tokenEndpoint = 'https://accounts.spotify.com/api/token';
-    const encodedCredentials = btoa(`${client_id}:${client_secret}`);
-
-    try {
-        const response = await fetch(tokenEndpoint, {
-            method: 'POST',
-            headers: {
-                'Authorization': `Basic ${encodedCredentials}`,
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: new URLSearchParams({ grant_type: 'client_credentials' })
-        });
-
-        if (!response.ok) throw new Error(`Error: ${response.status} ${response.statusText}`);
-
-        const data = await response.json();
-        accessToken = data.access_token; // Store the token globally
-        console.log('Access Token:', accessToken);
-    } catch (error) {
-        console.error('Failed to get access token:', error);
-    }
-};
-
 // Function to Search for Songs on Spotify
 const searchSongs = async (query) => {
     if (!accessToken) {

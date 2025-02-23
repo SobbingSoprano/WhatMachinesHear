@@ -77,15 +77,102 @@ body {
 }
 .artist-name {
     font-family: afacad flux;
-    transition: text-shadow 1s ease-in-out;
+    transition: text-shadow .35s ease-in-out;
 }
 
 .cover-art {
     box-shadow: gray 0px 0px;
-    transition: box-shadow 1s ease-in-out;
+    transition: box-shadow .35ss ease-in-out;
 }
 
 .cover-art:hover {
     box-shadow: 5px 3.2px;
     transition: box-shadow .35s ease-in-out;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+a:focus {
+    outline: none;
+}
+.now-playing {
+    font-size: 40px;
+    place-self: center;
+    font-family: afacad flux;
+}
+.song-contain {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Heading Styles */
+.heading {
+    font-family: "Afacad Flux", sans-serif;
+    font-size: 60px;
+    letter-spacing: 8px;
+    margin-bottom: 10px;
+}
+
+.heading a {
+    text-decoration: none;
+    color: black;
+}
+
+/* Now Playing */
+.now-playing {
+    font-size: 40px;
+    font-family: "Afacad Flux", sans-serif;
+    margin-bottom: 20px;
+}
+
+/* Song Details */
+#song-details {
+    margin-bottom: 20px;
+}
+
+/* Cover Art */
+.cover-art {
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px gray;
+    transition: box-shadow 0.35s ease-in-out;
+}
+
+.cover-art:hover {
+    box-shadow: 5px 5px 10px black;
+}
+
+/* Buttons (Play & Pause) */
+.controls {
+    display: flex;
+    gap: 20px;
+}
+
+button {
+    font-size: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+}
+
+#play-button {
+    background-color: black;
+    color: white;
+}
+
+#pause-button {
+    background-color: black;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.8;
+    transition: opacity 0.3s ease-in-out;
 }

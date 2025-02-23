@@ -77,11 +77,25 @@ const displayResults = (tracks) => {
         `;
 
         resultsDiv.appendChild(songItem);
-
+        songItem.querySelector(".cover-art").addEventListener("click", function () {
+            updatePlayButton(track.id); // Update play button to play the selected track
+        });
+        
         setTimeout(() => {
             songItem.classList.remove('hide');
         }, 500 * (index + 1));
     });
+};
+
+const updatePlayButton = (trackId) => {
+    const playButton = document.getElementById("play-button");
+    playButton.onclick = async () => {
+        await fetch("https://api.spotify.com/v1/me/player/play", {
+            method: "PUT",
+            headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" },
+            body: JSON.stringify({ uris: [`spotify:track:${trackId}`] }) // Always play the selected track
+        });
+    };
 };
 
 

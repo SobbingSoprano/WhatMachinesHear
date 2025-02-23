@@ -4,13 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Now Playing</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="Main.css">
 </head>
 <body>
-    <h1>Now Playing</h1>
-    <div id="song-details"></div>
-    <button id="play-button">▶ Play</button>
+    <div class="song-contain">
+        <h1 class="heading"><a href="index.html">What Machines Hear</a></h1>
+        <h1 class="now-playing">Now Playing</h1>
+        <div id="song-details"></div>
 
+        <div class="controls">
+            <button id="play-button">▶ Play</button>
+            <button id="pause-button">|| Pause</button>
+        </div>
+    </div>
     <script src="song.js"></script>
 </body>
 </html>

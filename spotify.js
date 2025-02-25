@@ -2,7 +2,7 @@ const client_id = 'f7cfe8cfaace4308b94aa278c99ce07e';
 const client_secret = '0e07a19d71f44e5180bc8f58ebfda9a3';
 
 
-let accessToken = 'BQA3ZiHf1eutng29LqLWy2G4NxiVS1cJaKdPXRmha4oUc3l8fxoAmYnchhvB-MLPT4aLzf700dKFlTj6oI1KtnLBa8aDviUNsgj9A0e4KC6fCyBNoYWVzjbNLQtZqyFzS-uMKU4eaYVYHRy1F1gAYle2yoriZJfgLO4d7v3MwhRo1EQIJNCfcuRuOFwCqF1BljButn_jWheVNEELcjMfnLrEIqAiQY4-zgr-BQPZAklszqRsOL002z9Cb8Cb5WPz'; // Store globally
+let accessToken = 'BQAOq67dChHME8UdsuRZq3WHrKDSxU9AuAXGORGAn5ixVGYW3nePYUWPnL-9R1G__W_1uGTFto_NwIZIOdvScnuYlV5Evv_18EARGz-_Sste24wVYIgb2dc2h_urlZVjDA7wG5TxF_Ex1P38lEwzt8QKeQZI2k2khXAzwcDMMFPclMiuhrVhiyo9RsUcRyX6l8xOtecwVOpsKui9BTf8ubT8w0fDx38KMXatCS4L9SPgMrPe9Q2A_YOO1J7esEBq'; // Store globally
 
 // Function to get the Spotify Access Token
 const getSpotifyToken = async () => {

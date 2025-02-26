@@ -161,6 +161,10 @@ button {
     cursor: pointer;
     transition: opacity 0.3s ease-in-out;
 }
+#rewind-button {
+    background-color: black;
+    color: white;
+}
 
 #play-button {
     background-color: black;
@@ -184,4 +188,27 @@ button:hover {
     width: 85%;
     margin-top: 30px;
     border-radius: 20px;
+    align-items: center;
+    justify-content: center;
+}
+.horm{
+    display: flex;
+    flex-direction: column;
+    width: auto;
+}
+.translator {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    place-items: center;
+    justify-content: center;
+}
+#translate {
+    margin: 40px 0px 0px 5px;
+    background-color: black;
+    color: white;
+    width: 7%;
+    height: 60px;
+    border-radius: 500px;
+    justify-items: center;
 }

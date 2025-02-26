@@ -2,7 +2,7 @@ const client_id = 'f7cfe8cfaace4308b94aa278c99ce07e';
 const client_secret = '0e07a19d71f44e5180bc8f58ebfda9a3';
 
 
- // Store globally
+let accessToken = 'BQBQPXavMORXU_8ZuEAd15A4Vz_1hwyYnMhZExhqYO87-5U3oC-491Uj7kK2Fnz4cEZU7eIgTBSCIcAKvdQJJRJL1xWJHzn1To0HHLMbWkhMELO-0Va8b6kvnlOkEOp_Fm87ibkzTj7fXoPTIepSocPs7JD2i9-bWEggNmmApEvyJBthQRiex0KO_jP0vDVk7zALCafANjWWLRZ4PzyLv5Y4gp_y7DfxLV8K2o1EfpMUC-rLJopOpNDX5CpnUui7'; // Store globally
 
 // Function to get the Spotify Access Token
 const getSpotifyToken = async () => {
@@ -24,12 +24,11 @@ const getSpotifyToken = async () => {
         const data = await response.json();
         accessToken = data.access_token; // Store the token globally
         console.log('Access Token:', accessToken);
-        return data.access_token;
-    } catch (error) {
+    }   catch (error) {
         console.error('Failed to get access token:', error);
     }
 };
-let accessToken = getSpotifyToken();
+
 // Function to Search for Songs on Spotify
 const searchSongs = async (query) => {
     if (!accessToken) {
@@ -114,4 +113,3 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 // next step: add a link to the cover art that goes to playback/lyrics/binary translation page? still not sure on the details of this yet-
-

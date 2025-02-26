@@ -1,5 +1,3 @@
-let accessToken = "BQAOq67dChHME8UdsuRZq3WHrKDSxU9AuAXGORGAn5ixVGYW3nePYUWPnL-9R1G__W_1uGTFto_NwIZIOdvScnuYlV5Evv_18EARGz-_Sste24wVYIgb2dc2h_urlZVjDA7wG5TxF_Ex1P38lEwzt8QKeQZI2k2khXAzwcDMMFPclMiuhrVhiyo9RsUcRyX6l8xOtecwVOpsKui9BTf8ubT8w0fDx38KMXatCS4L9SPgMrPe9Q2A_YOO1J7esEBq";
-
 document.addEventListener("DOMContentLoaded", async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const trackId = urlParams.get("track_id");
@@ -24,6 +22,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         <img src="${track.album.images[0].url}" alt="${track.name} Cover Art" class="cover-art"/>
         <p><a href="${track.external_urls.spotify}" target="_blank">Play in Spotify to Enable Transcription</a></p>
     `;
+    document.getElementById("rewind-button").addEventListener("click", async () => {
+        await fetch("https://api.spotify.com/v1/me/player/play", {
+            method: "PUT",
+            headers: { Authorization: `Bearer ${AccessToken}`, "Content-Type": "application/json" },
+            body: JSON.stringify({ uris: [`spotify:track:${trackId}`] })
+        });
+    });
 
     document.getElementById("play-button").addEventListener("click", async () => {
         await fetch("https://api.spotify.com/v1/me/player/play", {

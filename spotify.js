@@ -24,6 +24,7 @@ const getSpotifyToken = async () => {
         const data = await response.json();
         accessToken = data.access_token; // Store the token globally
         console.log('Access Token:', accessToken);
+        return accessToken;
     }   catch (error) {
         console.error('Failed to get access token:', error);
     }

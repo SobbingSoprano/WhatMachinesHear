@@ -13,6 +13,10 @@ body {
     opacity: 0;
     transition: opacity 2s ease-in-out;
 }
+.show {
+    opacity: 1;
+    transition: opacity 2s ease-in-out;
+}
 .container {
     flex-direction: column;
 }
@@ -203,12 +207,25 @@ button:hover {
     place-items: center;
     justify-content: center;
 }
-#translate {
+#translateh {
+    display: flex;
     margin: 40px 0px 0px 5px;
     background-color: black;
     color: white;
     width: 7%;
     height: 60px;
     border-radius: 500px;
-    justify-items: center;
+    justify-content: center;
+    align-items: center;
+}
+#translater {
+    display: flex;
+    margin: 40px 0px 0px 5px;
+    background-color: black;
+    color: white;
+    width: 7%;
+    height: 60px;
+    border-radius: 500px;
+    justify-content: center;
+    align-items: center;
 }

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Now Playing</title>
     <link rel="stylesheet" href="Main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="song-contain">
@@ -18,15 +19,18 @@
             <button id="pause-button">|| Pause</button>
         </div>
         <div class = translator>
-        <div class = 'lyrics'></div>
+        <canvas id = "soundwave" width="800" height = "300"></canvas>
         <div class = 'horm'>
-        <button id = "translate"></button>
-        <button id = "translate"></button>
+        <button id = "translateh"> <i class="fas fa-user"></i></button>
+        <button id = "translater"><i class="fas fa-robot"></i></button>
     </div>
     </div>
     </div>
+    <script src="main.js"></script>
     <script src="spotify.js"></script>
     <script src="song.js"></script>
+    <script src="audio.js"></script>
     <script src="lyrics.js"></script>
+      
 </body>
 </html>

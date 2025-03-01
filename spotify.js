@@ -2,7 +2,7 @@ const client_id = 'f7cfe8cfaace4308b94aa278c99ce07e';
 const client_secret = '0e07a19d71f44e5180bc8f58ebfda9a3';
 
 
- // Store globally
+
 
 // Function to get the Spotify Access Token
 const getSpotifyToken = async () => {
@@ -24,12 +24,11 @@ const getSpotifyToken = async () => {
         const data = await response.json();
         accessToken = data.access_token; // Store the token globally
         console.log('Access Token:', accessToken);
-        return data.access_token;
-    } catch (error) {
+    }   catch (error) {
         console.error('Failed to get access token:', error);
     }
 };
-let accessToken = getSpotifyToken();
+let accessToken = getSpotifyToken(); // Store globally
 // Function to Search for Songs on Spotify
 const searchSongs = async (query) => {
     if (!accessToken) {
@@ -112,6 +111,4 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 });
-
 // next step: add a link to the cover art that goes to playback/lyrics/binary translation page? still not sure on the details of this yet-
-

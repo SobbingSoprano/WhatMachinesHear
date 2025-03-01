@@ -185,3 +185,7 @@ button:hover {
     margin-top: 30px;
     border-radius: 20px;
 }
+placeholder {
+    color:white;
+    font-size: 15px;
+}

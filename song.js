@@ -6,9 +6,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.getElementById("song-details").innerText = "No track found.";
         return;
     }
-
-    const AccessToken = accessToken;
-
+    const AccessToken = "umm";
+    console.log("what is this?:",AccessToken);
     // Fetch track details
     const response = await fetch(`https://api.spotify.com/v1/tracks/${trackId}`, {
         headers: { Authorization: `Bearer ${AccessToken}` }

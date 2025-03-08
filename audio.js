@@ -81,7 +81,7 @@ function visualize() {
 
             // Highlight the most prominent frequencies (e.g., if it's above a certain threshold)
             if (i === maxIndex) {
-                canvasContext.fillStyle = 'rgb(255, 230, 0)';  // Red for the most prominent frequency
+                canvasContext.fillStyle = 'rgb(255, 255, 255)';  // Red for the most prominent frequency
             } else {
                 canvasContext.fillStyle = 'rgb(0,50,50)';
             }

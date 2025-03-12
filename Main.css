@@ -25,14 +25,41 @@ body {
     width: auto;
     justify-content: center;
     align-content: center;
+    place-items: center;
     padding:10px 5px 20px 5px;
 }
 .heading {
     font-family: afacad flux;
-    font-size: 60px;
-    letter-spacing:8px;
+    font-size: 20px;
+    letter-spacing: 4px;
     padding:0;
     margin:0;
+    transition: font-size 1s ease-in-out, letter-spacing 1s ease-in-out;
+}
+.now-playing {
+    font-size: 15px;
+    font-family: "Afacad Flux", sans-serif;
+    margin-bottom: 20px;
+    place-self: center;
+    transition: font-size 1s ease-in-out;
+}
+@media (min-width: 440px) {
+    .heading, .heading a {
+        font-size: 30px;
+        letter-spacing: 6px;
+    }
+    .now-playing {
+        font-size: 25px;
+    }
+}
+@media (min-width: 768px) {
+    .heading, .heading a {
+        font-size: 60px;
+        letter-spacing: 8px;
+    }
+    .now-playing {
+        font-size: 40px;
+    }
 }
 .searchbar {
     background-color: black;
@@ -100,11 +127,6 @@ a {
 a:focus {
     outline: none;
 }
-.now-playing {
-    font-size: 40px;
-    place-self: center;
-    font-family: afacad flux;
-}
 .song-contain {
     display: flex;
     flex-direction: column;
@@ -113,25 +135,13 @@ a:focus {
     padding: 20px;
 }
 
-/* Heading Styles */
-.heading {
-    font-family: "Afacad Flux", sans-serif;
-    font-size: 60px;
-    letter-spacing: 8px;
-    margin-bottom: 10px;
-}
-
 .heading a {
     text-decoration: none;
     color: black;
+    transition: font-size 1s ease-in-out;
 }
 
-/* Now Playing */
-.now-playing {
-    font-size: 40px;
-    font-family: "Afacad Flux", sans-serif;
-    margin-bottom: 20px;
-}
+
 
 /* Song Details */
 #song-details {

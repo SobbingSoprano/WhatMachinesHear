@@ -3,12 +3,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     const trackId = urlParams.get("track_id");
 
     if (!trackId) {
-        document.getElementById("song-details").innerText = "No track found.";
+        alert("No Track Was Found!");
         return;
     }
 
     // Get the access token with the necessary scopes
-    const accessToken = "BQCCl9mEnN4uqsXLGKUynBnjh8MnFnKDj12Yxkt7AVyD3Ooxo5qFhLLXelOXX4-5rA1DRLJi4XO-O7qKBfe4xeJqzIvQJCZH-USYh4QqMVXAIht11jsNjYOiFYCo7Z69Td9yPXSz8WGD6kwRqoThSVr578vmgc_fj_rS8YL9_4S35Gsr_Sci9YuRu8vHyUyMC7xJ2KtPZ22GTGDmI7x0XQqQpHcB-Pm-hRiO4HKKDZotUBVWWqCI3UZlOCAZRgIp";
+    const accessToken = "BQCKIOWs6yBlIK6pavDoi21TnmXO1n9-bJHP7s5A0ii_-rc7eNdwyZO2mg77c3-U-6cenNImSRhwnMbMfvKNSVZb4OdcF0A6vf7AJPH-VZ2HnyvKomCJCkAElQocsl2GUmgWnTHCXkEayi4082cqtuHZYKHEujHaV-8Ej20oyzUjJsnkoxk4meEXhSM6XOSmFT0q-AWKFV2__2l4EpWgulpGrjBxC78N6Cu5KjkxDnaLHW1Tg4K3PEnzw6ZrB5rR    ";
 
     // Fetch track details
     const response = await fetch(`https://api.spotify.com/v1/tracks/${trackId}`, {
@@ -21,7 +21,24 @@ document.addEventListener("DOMContentLoaded", async () => {
         <p>by ${track.artists.map(a => a.name).join(", ")}</p>
         <img src="${track.album.images[0].url}" alt="${track.name} Cover Art" class="cover-art"/>
     `;
+    const controlbuttonlayout = document.querySelector('horm')
+    const translateH = document.getElementById('translateh');
+    const translateR = document.getElementById('translater');
+    const binaryContainer = document.getElementById("binaryTranslation");
+    const soundwaveCanvas = document.getElementById("soundwave");
+    binaryContainer.style.display = "none";
 
+    translateH.addEventListener("click", () => {
+        soundwaveCanvas.style.opacity = "100";  // Show soundwave
+        binaryContainer.style.display = "none";
+        controlbuttonlayout.style.marginLeft = "0";
+    });
+
+    translateR.addEventListener("click", () => {
+        soundwaveCanvas.style.opacity = "0";   // Hide soundwave
+        binaryContainer.style.display = "block";
+        controlbuttonlayout.style.marginLeft = "95%"; // Show binary container
+    });
     // Initialize the Spotify Web Playback SDK
     window.onSpotifyWebPlaybackSDKReady = () => {
         const player = new Spotify.Player({
@@ -38,13 +55,29 @@ document.addEventListener("DOMContentLoaded", async () => {
         player.addListener('ready', async ({ device_id }) => {
             console.log('Player is ready with Device ID:', device_id);
 
-            // Transfer playback to Web SDK
-            await fetch("https://api.spotify.com/v1/me/player", {
+        // Transfer playback to Web SDK and Start Playing Searched Song as soon as song.html is opened
+        await fetch("https://api.spotify.com/v1/me/player", {
                 method: "PUT",
                 headers: { "Authorization": `Bearer ${accessToken}`, "Content-Type": "application/json" },
                 body: JSON.stringify({ device_ids: [device_id], play: false })
             });
+        await fetch(`https://api.spotify.com/v1/me/player/seek?position_ms=0`, {
+            method: "PUT",
+            headers: {
+                "Authorization": `Bearer ${accessToken}`,
+                "Content-Type": "application/json"
+            }
+        });
+        await fetch(`https://api.spotify.com/v1/me/player/play`, {
+            method: "PUT",
+            headers: {
+                "Authorization": `Bearer ${accessToken}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({uris: [`spotify:track:${trackId}`]})
+        });
 
+        //Control logic for rewinding, playing, and pausing
             document.getElementById("rewind-button").onclick = async () => {
                 try {
                     // Seek to the beginning of the current track
@@ -67,10 +100,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                     });
             
                 } catch (error) {
-                    console.error("Error rewinding and playing:", error);
+                    alert("Error rewinding and playing:", error);
                 }
             };
-
+            
             document.getElementById("play-button").onclick = async () => {
                 currentTrackId = trackId;
                 await fetch(`https://api.spotify.com/v1/me/player/play`, {
@@ -96,3 +129,4 @@ document.addEventListener("DOMContentLoaded", async () => {
     script.src = "https://sdk.scdn.co/spotify-player.js";
     document.body.appendChild(script);
 });
+    

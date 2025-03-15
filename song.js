@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     // Get the access token with the necessary scopes
-    const accessToken = "BQCKIOWs6yBlIK6pavDoi21TnmXO1n9-bJHP7s5A0ii_-rc7eNdwyZO2mg77c3-U-6cenNImSRhwnMbMfvKNSVZb4OdcF0A6vf7AJPH-VZ2HnyvKomCJCkAElQocsl2GUmgWnTHCXkEayi4082cqtuHZYKHEujHaV-8Ej20oyzUjJsnkoxk4meEXhSM6XOSmFT0q-AWKFV2__2l4EpWgulpGrjBxC78N6Cu5KjkxDnaLHW1Tg4K3PEnzw6ZrB5rR    ";
+    const accessToken = "BQA5ot9QBeJi5JIcUO9NZtjHbNzV287MLint7z53K3Eaj5xXLzWBFTH-iPZ9sAdMgHgrcWIdzsYzX2zzio7M3aX4SDzm3Mxl5SLELGH7WVJ36BseQegLftPUCFuTQ2FVEXxfNjB9nJJYTZRuY1oigxr0_vD22EQb9VKFNHDb2Eb7MPh_YBb2rnNiCZSIwhGNqnKIzpoxJ9CPSops2W9NKAzlqra7frcWJ_UYbtbBrJsRh-SDDE3iZjBTbM5LciQs    ";
 
     // Fetch track details
     const response = await fetch(`https://api.spotify.com/v1/tracks/${trackId}`, {
@@ -39,6 +39,39 @@ document.addEventListener("DOMContentLoaded", async () => {
         binaryContainer.style.display = "block";
         controlbuttonlayout.style.marginLeft = "95%"; // Show binary container
     });
+    //function dedicated to translation of audio data into binary counterpart
+    async function binaryTranslation() {
+        const binaryContainer = document.getElementById("binaryTranslation");
+        //function makes the microphone record real time audio to turn into binary code- binary code is determined by the resing and falling of amplitude values
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const analyser = audioContext.createAnalyser();
+            const source = audioContext.createMediaStreamSource(stream);
+            source.connect(analyser);
+            analyser.fftSize = 256; // frequency adjuster
+    
+            const bufferLength = analyser.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+            //used to check and update binary values
+            function refreshBinary() {
+                analyser.getByteFrequencyData(dataArray);
+                let binaryString = Array.from(dataArray)
+                    .map(num => num.toString(2).padStart(8, "0")) // Convert each byte to binary
+                    .join(" ");
+    
+                binaryContainer.textContent = binaryString.substring(0, 500); // Limit display length
+                requestAnimationFrame(refreshBinary); //forces binary code container to constantly update the values
+            }
+    
+            refreshBinary();
+        } catch (err) {
+            alert("Error accessing microphone:", err);
+        }
+    }
+    //translation is started when "robot" button is clicked
+    document.getElementById("translater").addEventListener("click", binaryTranslation);
+    
     // Initialize the Spotify Web Playback SDK
     window.onSpotifyWebPlaybackSDKReady = () => {
         const player = new Spotify.Player({

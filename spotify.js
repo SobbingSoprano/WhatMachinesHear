@@ -30,6 +30,7 @@ const getSpotifyToken = async () => {
     }
 };
 let accessToken = getSpotifyToken(); // Store globally
+
 // Function to Search for Songs on Spotify
 const searchSongs = async (query) => {
     if (!accessToken) {
@@ -78,9 +79,6 @@ const displayResults = (tracks) => {
         `;
 
         resultsDiv.appendChild(songItem);
-        songItem.querySelector(".cover-art").addEventListener("click", function () {
-            updatePlayButton(track.id); // Update play button to play the selected track
-        });
         
         setTimeout(() => {
             songItem.classList.remove('hide');
@@ -112,4 +110,3 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 });
-// next step: add a link to the cover art that goes to playback/lyrics/binary translation page? still not sure on the details of this yet-

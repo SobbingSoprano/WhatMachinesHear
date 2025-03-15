@@ -10,7 +10,7 @@ body {
     transition: opacity 2s ease-in-out;
 }
 .hide {
-    opacity: 0;
+    opacity: 0;tran
     transition: opacity 2s ease-in-out;
 }
 .show {
@@ -194,28 +194,38 @@ button:hover {
     opacity: 0.8;
     transition: opacity 0.3s ease-in-out;
 }
-
-.lyrics {
-    background-color: black;
-    padding: 5px 15px 15px 0px;
-    height: 300px;
-    width: 85%;
-    margin-top: 30px;
-    border-radius: 20px;
-    align-items: center;
-    justify-content: center;
-}
 .horm{
     display: flex;
     flex-direction: column;
     width: auto;
+    position: relative;
+    margin-left: 0%;
+    transition: margin-left 0.3s ease-in-out;
 }
 .translator {
     display: flex;
     flex-direction: row;
-    width: 100%;
+    height: 300px;
+    width: 800px;
     place-items: center;
     justify-content: center;
+    position: relative;
+}
+.binary-container {
+    border-radius: 30px;
+    margin-top: 30px;
+    margin-right: 100px;
+    width: 800px;
+    height: 300px;
+    background-color: black;
+    color: limegreen; /* Matrix-style effect */
+    font-family: monospace;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    position: absolute;
 }
 #translateh {
     display: flex;

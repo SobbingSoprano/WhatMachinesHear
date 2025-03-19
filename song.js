@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
     // Get the access token with the necessary scopes
-    const accessToken = "BQA5ot9QBeJi5JIcUO9NZtjHbNzV287MLint7z53K3Eaj5xXLzWBFTH-iPZ9sAdMgHgrcWIdzsYzX2zzio7M3aX4SDzm3Mxl5SLELGH7WVJ36BseQegLftPUCFuTQ2FVEXxfNjB9nJJYTZRuY1oigxr0_vD22EQb9VKFNHDb2Eb7MPh_YBb2rnNiCZSIwhGNqnKIzpoxJ9CPSops2W9NKAzlqra7frcWJ_UYbtbBrJsRh-SDDE3iZjBTbM5LciQs    ";
+    const fullAccessToken = "BQBNvw3qG1UfZwFO7JAORR6DtM3GGs4iZJAgbzhpQv7IZ8NCw35wLDNRpRkP1YnJ2bTha8GT8Zqfp3R-wS7e5WjJaTQzasa0tMLXiMgDJtZZ7idOl5O2WbdWhZ5C-jQAPQhsTAeIX-bsGBRN4kqn6U_DKO93eq6gEO8vlMZevm9UQXAVexOOQhdtdoIK6YetOLd8XFn9vxrtXoScyLGNCKlPobEi_R2mp45VMnnX9vwwym58u9-7BHNT5JA52B02";
 
     // Fetch track details
     const response = await fetch(`https://api.spotify.com/v1/tracks/${trackId}`, {
@@ -95,14 +95,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         await fetch(`https://api.spotify.com/v1/me/player/seek?position_ms=0`, {
             method: "PUT",
             headers: {
-                "Authorization": `Bearer ${accessToken}`,
+                "Authorization": `Bearer ${fullAccessToken}`,
                 "Content-Type": "application/json"
             }
         });
         await fetch(`https://api.spotify.com/v1/me/player/play`, {
             method: "PUT",
             headers: {
-                "Authorization": `Bearer ${accessToken}`,
+                "Authorization": `Bearer ${fullAccessToken}`,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({uris: [`spotify:track:${trackId}`]})

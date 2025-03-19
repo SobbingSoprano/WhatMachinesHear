@@ -3,12 +3,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     const trackId = urlParams.get("track_id");
     //Alerts user if no track is found from search
     if (!trackId) {
-        alert("No track found.");
+        alert("No Track Was Found!");
         return;
     }
     // Get the access token with the necessary scopes
-    const fullAccessToken = "BQAAVhYocrPCKpWFNnNNrby8XN1sHrQydVzcR_-qqRUQm_8IbkrHqhpihIIeMwVG_zF8c515TtvUWflJC6w3Li18uF1GlsLQxLM6epTmpW1F6u6bmv7onFl2Au5yRiqzgkPsIciInn8nnNhRBvvabDHTU3V-B0m9HrHL6SmKN3Nd0Iv-XWB6dGvmDhuNPzVp52CMy17Wdu79tU8BqJPDPHbeGXPAOPIX0lHc1zU85NdWwcNeQe0oIZ9pq4MaR7SW";
-    // Fetch track details (artist, title)
+    const accessToken = "BQA5ot9QBeJi5JIcUO9NZtjHbNzV287MLint7z53K3Eaj5xXLzWBFTH-iPZ9sAdMgHgrcWIdzsYzX2zzio7M3aX4SDzm3Mxl5SLELGH7WVJ36BseQegLftPUCFuTQ2FVEXxfNjB9nJJYTZRuY1oigxr0_vD22EQb9VKFNHDb2Eb7MPh_YBb2rnNiCZSIwhGNqnKIzpoxJ9CPSops2W9NKAzlqra7frcWJ_UYbtbBrJsRh-SDDE3iZjBTbM5LciQs    ";
+
+    // Fetch track details
     const response = await fetch(`https://api.spotify.com/v1/tracks/${trackId}`, {
         headers: { Authorization: `Bearer ${fullAccessToken}` }
     });
@@ -18,8 +19,58 @@ document.addEventListener("DOMContentLoaded", async () => {
         <p>by ${track.artists.map(a => a.name).join(", ")}</p>
         <img src="${track.album.images[0].url}" alt="${track.name} Cover Art" class="cover-art"/>
     `;
+    const controlbuttonlayout = document.querySelector('horm')
+    const translateH = document.getElementById('translateh');
+    const translateR = document.getElementById('translater');
+    const binaryContainer = document.getElementById("binaryTranslation");
+    const soundwaveCanvas = document.getElementById("soundwave");
+    binaryContainer.style.display = "none";
 
-    // Initializing the Spotify Web Playback SDK
+    translateH.addEventListener("click", () => {
+        soundwaveCanvas.style.opacity = "100";  // Show soundwave
+        binaryContainer.style.display = "none";
+        controlbuttonlayout.style.marginLeft = "0";
+    });
+
+    translateR.addEventListener("click", () => {
+        soundwaveCanvas.style.opacity = "0";   // Hide soundwave
+        binaryContainer.style.display = "block";
+        controlbuttonlayout.style.marginLeft = "95%"; // Show binary container
+    });
+    //function dedicated to translation of audio data into binary counterpart
+    async function binaryTranslation() {
+        const binaryContainer = document.getElementById("binaryTranslation");
+        //function makes the microphone record real time audio to turn into binary code- binary code is determined by the resing and falling of amplitude values
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const analyser = audioContext.createAnalyser();
+            const source = audioContext.createMediaStreamSource(stream);
+            source.connect(analyser);
+            analyser.fftSize = 256; // frequency adjuster
+    
+            const bufferLength = analyser.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+            //used to check and update binary values
+            function refreshBinary() {
+                analyser.getByteFrequencyData(dataArray);
+                let binaryString = Array.from(dataArray)
+                    .map(num => num.toString(2).padStart(8, "0")) // Convert each byte to binary
+                    .join(" ");
+    
+                binaryContainer.textContent = binaryString.substring(0, 500); // Limit display length
+                requestAnimationFrame(refreshBinary); //forces binary code container to constantly update the values
+            }
+    
+            refreshBinary();
+        } catch (err) {
+            alert("Error accessing microphone:", err);
+        }
+    }
+    //translation is started when "robot" button is clicked
+    document.getElementById("translater").addEventListener("click", binaryTranslation);
+    
+    // Initialize the Spotify Web Playback SDK
     window.onSpotifyWebPlaybackSDKReady = () => {
         const player = new Spotify.Player({
             name: 'Web Playback SDK Player',
@@ -35,29 +86,30 @@ document.addEventListener("DOMContentLoaded", async () => {
         player.addListener('ready', async ({ device_id }) => {
             console.log('Player is ready with Device ID:', device_id);
 
-            // Transfer playback to Web SDK Player and automatically start playback
-            await fetch("https://api.spotify.com/v1/me/player", {
+        // Transfer playback to Web SDK and Start Playing Searched Song as soon as song.html is opened
+        await fetch("https://api.spotify.com/v1/me/player", {
                 method: "PUT",
                 headers: { "Authorization": `Bearer ${fullAccessToken}`, "Content-Type": "application/json" },
                 body: JSON.stringify({ device_ids: [device_id], play: false })
             });
-            await fetch(`https://api.spotify.com/v1/me/player/seek?position_ms=0`, {
-                method: "PUT",
-                headers: {
-                    "Authorization": `Bearer ${fullAccessToken}`,
-                    "Content-Type": "application/json"
-                }
-            });
-            await fetch(`https://api.spotify.com/v1/me/player/play`, {
-                method: "PUT",
-                headers: {
-                    "Authorization": `Bearer ${fullAccessToken}`,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({uris: [`spotify:track:${trackId}`]})
-            });
-            // Controls for streaming
-            document.getElementById("rewind-button").onclick = async () => { //logic for rewind button
+        await fetch(`https://api.spotify.com/v1/me/player/seek?position_ms=0`, {
+            method: "PUT",
+            headers: {
+                "Authorization": `Bearer ${accessToken}`,
+                "Content-Type": "application/json"
+            }
+        });
+        await fetch(`https://api.spotify.com/v1/me/player/play`, {
+            method: "PUT",
+            headers: {
+                "Authorization": `Bearer ${accessToken}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({uris: [`spotify:track:${trackId}`]})
+        });
+
+        //Control logic for rewinding, playing, and pausing
+            document.getElementById("rewind-button").onclick = async () => {
                 try {
                     // Seek to the beginning of the current track
                     await fetch(`https://api.spotify.com/v1/me/player/seek?position_ms=0`, {
@@ -82,8 +134,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                     alert("Error rewinding and playing:", error);
                 }
             };
-
-            document.getElementById("play-button").onclick = async () => { //logic for play button
+            
+            document.getElementById("play-button").onclick = async () => {
                 currentTrackId = trackId;
                 await fetch(`https://api.spotify.com/v1/me/player/play`, {
                     method: "PUT",
@@ -113,3 +165,4 @@ document.addEventListener("DOMContentLoaded", async () => {
         element.style.pointerEvents = 'none';
     }
 });
+    

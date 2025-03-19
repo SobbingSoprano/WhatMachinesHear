@@ -1,3 +1,4 @@
+//handles fade in for elements on homepage
 document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.remove("hide");
     setTimeout(() => {

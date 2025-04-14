@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
     // Get the access token with the necessary scopes
-    const fullAccessToken = "BQBNvw3qG1UfZwFO7JAORR6DtM3GGs4iZJAgbzhpQv7IZ8NCw35wLDNRpRkP1YnJ2bTha8GT8Zqfp3R-wS7e5WjJaTQzasa0tMLXiMgDJtZZ7idOl5O2WbdWhZ5C-jQAPQhsTAeIX-bsGBRN4kqn6U_DKO93eq6gEO8vlMZevm9UQXAVexOOQhdtdoIK6YetOLd8XFn9vxrtXoScyLGNCKlPobEi_R2mp45VMnnX9vwwym58u9-7BHNT5JA52B02";
+    const fullAccessToken = "BQBejEJmLNplzuc6YrK5Z2vS1VF_gCCjvHDZ3l1yvhoC4lMUjvmBoxrjLYWZQlzeoVvSZ2zNUdjms6XH64qn0o9TXu5FKCLBR7f6JJV6AxjWQ8_3orROfsHm2xVcTHTWnAkMfXxOLPCCzoiRNpoLh469nq71_gNOqeLs916D9TOj5fx0KPtlVt1QY2sW6tqgNCUwYQPhhtJ5D37Egr20DmKMblhWRhA9HaymLQImqbq_1AF0dnQ35ACfssLoEIhjSiSt    ";
 
     // Fetch track details
     const response = await fetch(`https://api.spotify.com/v1/tracks/${trackId}`, {

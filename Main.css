@@ -266,7 +266,6 @@ button:hover {
     background-color: black;
     z-index: 10;  /* Ensure it's on top of the soundwave */
     opacity: 0;   /* Initially hidden */
-    transition: opacity 0.5s ease-in-out; /* Fade in/out transition */
 }
 
 /* When the soundwave is hidden, show the overlay */

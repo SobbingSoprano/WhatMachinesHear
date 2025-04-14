@@ -11,11 +11,9 @@ body {
 }
 .hide {
     opacity: 0;
-    transition: opacity 2s ease-in-out;
 }
 .show {
     opacity: 1;
-    transition: opacity 2s ease-in-out;
 }
 .container {
     flex-direction: column;
@@ -225,7 +223,7 @@ button:hover {
     width: 600px;
     height: 120px;
     background-color: black;
-    color: white; /* Matrix-style effect */
+    color: white;
     font-family: monospace;
     display: none;
     justify-content: center;
@@ -275,7 +273,7 @@ button:hover {
     right: 0;
     bottom: 0;
     background-color: black;
-    z-index: 10;  /* Ensure it's on top of the soundwave */
+    z-index: 2;  /* Ensure it's on top of the soundwave */
     opacity: 0;   /* Initially hidden */
 }
 

@@ -27,7 +27,7 @@ const getSpotifyToken = async () => {
         console.log('Access Token:', accessToken);
         return accessToken;
     }   catch (error) {
-        console.error('Failed to get access token:', error);
+        alert('Failed to get access token:', error);
     }
 };
 let accessToken = getSpotifyToken(); // Store globally

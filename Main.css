@@ -257,6 +257,17 @@ button:hover {
     justify-content: center;
     align-items: center;
 }
+#toggle-logging {
+    display: none;
+    margin: 40px 0px 0px 5px;
+    background-color: black;
+    color: white;
+    width: 7%;
+    height: 60px;
+    border-radius: 500px;
+    justify-content: center;
+    align-items: center;
+}
 .soundwave-overlay {
     position: absolute;
     top: 0;

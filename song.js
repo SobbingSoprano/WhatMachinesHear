@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const controlbuttonlayout = document.querySelector('horm')
     const translateH = document.getElementById('translateh');
     const translateR = document.getElementById('translater');
+    const translateL = document.getElementById('toggle-logging');
     const binaryContainer = document.getElementById("binaryTranslation");
     const soundwaveCanvas = document.getElementById("soundwave");
     binaryContainer.style.display = "none";
@@ -29,46 +30,74 @@ document.addEventListener("DOMContentLoaded", async () => {
     translateH.addEventListener("click", () => {
         soundwaveCanvas.style.opacity = "100";  // Show soundwave
         binaryContainer.style.display = "none";
-        controlbuttonlayout.style.marginLeft = "0";
+        translateL.style.display = "none";
     });
 
     translateR.addEventListener("click", () => {
         soundwaveCanvas.style.opacity = "0";   // Hide soundwave
-        binaryContainer.style.display = "block";
-        controlbuttonlayout.style.marginLeft = "95%"; // Show binary container
+        binaryContainer.style.display = "block";// Show binary container
+        translateL.style.display = "flex"; //show translation logging button
     });
     //function dedicated to translation of audio data into binary counterpart
-    async function binaryTranslation() {
-        const binaryContainer = document.getElementById("binaryTranslation");
-        //function makes the microphone record real time audio to turn into binary code- binary code is determined by the resing and falling of amplitude values
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const analyser = audioContext.createAnalyser();
-            const source = audioContext.createMediaStreamSource(stream);
-            source.connect(analyser);
-            analyser.fftSize = 256; // frequency adjuster
-    
-            const bufferLength = analyser.frequencyBinCount;
-            const dataArray = new Uint8Array(bufferLength);
-            //used to check and update binary values
-            function refreshBinary() {
-                analyser.getByteFrequencyData(dataArray);
-                let binaryString = Array.from(dataArray)
-                    .map(num => num.toString(2).padStart(8, "0")) // Convert each byte to binary
-                    .join(" ");
-    
-                binaryContainer.textContent = binaryString.substring(0, 500); // Limit display length
-                requestAnimationFrame(refreshBinary); //forces binary code container to constantly update the values
-            }
-    
-            refreshBinary();
-        } catch (err) {
-            alert("Error accessing microphone:", err);
+    let isLogging = false; // Control logging state
+
+    // Create a function to toggle conversion logging
+    function toggleLogging() {
+        if (!isLogging){
+            alert('Console logging is now active- Avoid using it for extended periods of time as this can cause throttling.');
+            isLogging = true;
+            return;
+        }
+        if (isLogging) {
+            alert('Console logging is off.');
+            isLogging = false;
+            return;
         }
     }
-    //translation is started when "robot" button is clicked
-    document.getElementById("translater").addEventListener("click", binaryTranslation);
+
+    // Add event listener to the toggle button to control logging
+    translateL.addEventListener("click", toggleLogging);
+// Function to handle binary translation and logging
+async function binaryTranslation() {
+    const binaryContainer = document.getElementById("binaryTranslation");
+
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const analyser = audioContext.createAnalyser();
+        const source = audioContext.createMediaStreamSource(stream);
+        source.connect(analyser);
+        analyser.fftSize = 256; // Frequency adjuster
+
+        const bufferLength = analyser.frequencyBinCount;
+        const dataArray = new Uint8Array(bufferLength);
+
+        // Function to refresh binary data and log it to the console
+        function refreshBinary() {
+            analyser.getByteFrequencyData(dataArray);
+            let binaryString = Array.from(dataArray)
+                .map(num => num.toString(2).padStart(8, "0")) // Convert each byte to binary
+                .join(" ");
+
+            // If logging is enabled, log the binary data with a timestamp
+            if (isLogging) {
+                const timestamp = new Date().getSeconds(); // Get current milliseconds
+                console.log(`Conversion at ${timestamp} seconds: ${binaryString.substring(0, 500)}`);
+            }
+
+            binaryContainer.textContent = binaryString.substring(0, 500); // Limit display length
+            setTimeout(refreshBinary, 1000); // Forces binary code container to update values regularly
+        }
+
+        refreshBinary();
+    } catch (err) {
+        alert("Error accessing microphone:", err);
+    }
+}
+//translation is started when "robot" button is clicked
+translateR.addEventListener("click", binaryTranslation);
+
+
     
     // Initialize the Spotify Web Playback SDK
     window.onSpotifyWebPlaybackSDKReady = () => {

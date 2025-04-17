@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
     // Get the access token with the necessary scopes
-    const fullAccessToken = "BQBejEJmLNplzuc6YrK5Z2vS1VF_gCCjvHDZ3l1yvhoC4lMUjvmBoxrjLYWZQlzeoVvSZ2zNUdjms6XH64qn0o9TXu5FKCLBR7f6JJV6AxjWQ8_3orROfsHm2xVcTHTWnAkMfXxOLPCCzoiRNpoLh469nq71_gNOqeLs916D9TOj5fx0KPtlVt1QY2sW6tqgNCUwYQPhhtJ5D37Egr20DmKMblhWRhA9HaymLQImqbq_1AF0dnQ35ACfssLoEIhjSiSt    ";
+    const fullAccessToken = "BQD4jqMOIYftxDVYKm4MUwGNAhjN-Fc8B582IOIQTA1KTqIlDD0UcnjsxNdhzQkyIZH6yCUFXBybQUKUqJKoUTOLBji0bP8Zb7iea1G6PwwslR7t238Sg1UQSnAozYacPC43DTuoEElnD2RpkTwVT8iu2RSnEMPuHWlLBU7UcQaVicJuMVN2Hh2J1jgA3tayAmT9b_xAxOOf6ch9-XyweLwnjqwydti1C33PDRtuzlD1nT4DR7pcnzs2wRGU7t8FgGma    ";
 
     // Fetch track details
     const response = await fetch(`https://api.spotify.com/v1/tracks/${trackId}`, {
@@ -82,10 +82,10 @@ async function binaryTranslation() {
             // If logging is enabled, log the binary data with a timestamp
             if (isLogging) {
                 const timestamp = new Date().getSeconds(); // Get current milliseconds
-                console.log(`Conversion at ${timestamp} seconds: ${binaryString.substring(0, 500)}`);
+                console.log(`Conversion at ${timestamp} seconds: ${binaryString.substring(0, 512)}`);
             }
 
-            binaryContainer.textContent = binaryString.substring(0, 500); // Limit display length
+            binaryContainer.textContent = binaryString.substring(0, 512); // Limit display length
             setTimeout(refreshBinary, 1000); // Forces binary code container to update values regularly
         }
 

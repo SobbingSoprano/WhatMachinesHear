@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
     // Get the access token with the necessary scopes
-    const fullAccessToken = "BQCs0q8kcKawMtrB-Vu5tmVyX_2FHvy6WUze7L7xx3ZXlZxcTSQOdAHSjSRyRcarcfBvS8q7jwTi-EZw5Fys9K0qofdumNhWiuHQmWp-i8G0_yIAtbp9ITEkAjJTRWBI5q8_BaHKwGpoEeB3-Ia8-hpUCAFF89bS60k4gEnSmYIj6X4jL3sFG55Rs_goWzjRx_ePLsIPQGAeXp4_wlVK6g5rSqGOtMA5FAGKcZjwu2n3WNgvAh1-2-8XdZH_X3HBh3B6    ";
+    const fullAccessToken = "BQAImnaSQHmCai3Wp16S1C3OKWLp_R4lzZ0Vux3rJf8lAc69wUXzyQWcReK_lNTwRO9OtG3n11aX8fow7PUzHIpTWEi-G3sX_3zZwplDZkNgR787W_xQgp76cLbRl8NvxphDw4eCsZMPLSDSICwWXsUdK2-Men6E495_7ySMOCz6cKtK9bMZ6GqITkRdqLczcxojERadmraLlS83W9KTxnfIxkY1yO57v9_hBzKe4OXUc0mW4dfOMFvWZ-IXO0LK9bPdMaiE_Oedzx_7mL6OhjLOYexCHeqvbBAkZdO7Y6G9PanoHt6oVepiDAuFF6nPTngNNjaxeLsicCLK_FcKoKyV-wtaHRqTB3OpaufoYbaf7fQ9aO1HA5ide-ICnrs    ";
 
     // Fetch track details
     const response = await fetch(`https://api.spotify.com/v1/tracks/${trackId}`, {
